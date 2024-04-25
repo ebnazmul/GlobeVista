@@ -10,9 +10,9 @@ const Navbar = () => {
         <div className="flex gap-4">
             <ul className="flex hover:*:bg-white/10 *:px-3 *:py-4 hover:*:rounded hover:*:border-b text-xl text-white items-center">
                 <li>Home</li>
-                <li>About</li>
-                <li>Countries</li>
-                <li>Tours</li>
+                <li>All Tourists Spot</li>
+                {/* <li>Countries</li>
+                <li>Tours</li> */}
             </ul>
         </div>
         <button className="bg-gray-300 py-2 px-4 rounded flex items-center gap-2"><FaLock/>Sign In</button>
