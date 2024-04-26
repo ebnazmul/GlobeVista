@@ -7,6 +7,8 @@ import "swiper/css";
 import "swiper/css/pagination";
 import "swiper/css/navigation";
 import Card from "../../Componant/Card/Card";
+import { Link } from "react-router-dom";
+import { Typewriter } from "react-simple-typewriter";
 
 const Home = () => {
   const [posts, setPosts] = useState([]);
@@ -20,7 +22,7 @@ const Home = () => {
       .catch(() => toast.error("Something went wrong"));
   }, []);
 
-  console.log(posts);
+//   console.log(posts);
 
   return (
     <div>
@@ -52,7 +54,15 @@ const Home = () => {
         <div className="absolute top-5 z-10 bg-black bg-opacity-40 text-white p-20">
           <h2 className="text-3xl">
             Ready for adventure? <br />
-            Book your next tour with us today!
+            Book your next <Typewriter
+            words={['Safe', 'Cheap', 'Best']}
+            loop={5}
+            cursor
+            cursorStyle='_'
+            typeSpeed={70}
+            deleteSpeed={50}
+            delaySpeed={1000}
+          /> tour with us today!
           </h2>
           <button className="bg-gray-600 px-4 py-2 rounded text-xl mt-4">
             Contact Us
@@ -60,10 +70,10 @@ const Home = () => {
         </div>
       </div>
       <div>
-        <h2 className="text-center text-xl lg:text-3xl my-10">Our Popular Tourist Spots</h2>
-        <div className="max-w-7xl mx-auto grid grid-cols-3 gap-4">
+        <h2 className="text-center text-xl lg:text-3xl my-10">Our Popular Destinations</h2>
+        <div className="max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-3 gap-8">
             {
-                posts.map((post)=> <Card key={post._id} post={post}></Card>)
+                posts.map((post)=> <Link to={`/details/${post._id}`} key={post._id}><Card key={post._id} post={post}></Card></Link>)
             }
         </div>
       </div>

@@ -39,7 +39,7 @@ const Navbar = () => {
                 <li>Add Tourists Spot</li>
               </Link>
             )}
-            {user && <li>My List</li>}
+            {user && <Link to="/mylists"><li>My List</li></Link>}
           </ul>
         </div>
 
