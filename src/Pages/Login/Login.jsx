@@ -2,9 +2,10 @@ import { useContext } from "react";
 import { useForm } from "react-hook-form";
 import { AuthContexts } from "../../Context/AuthContext";
 import { Link } from "react-router-dom";
+import toast from "react-hot-toast";
 
 const Login = () => {
-  const { signInWithEmail } = useContext(AuthContexts);
+  const { signInWithEmail, userInstantUpdate, setUserInstantUpdate, signInWithGoogle } = useContext(AuthContexts);
 
   const {
     register,
@@ -15,10 +16,15 @@ const Login = () => {
   const onSubmit = (data) => {
     const {email, password} = data;
     signInWithEmail(email, password)
-    .then(res => console.log(res))
+    .then(() => {
+        toast.success("Login success")
+        setUserInstantUpdate(!userInstantUpdate)
+
+    })
     .catch(err => console.log(err))
 
   };
+  
 
   return (
     <div>
@@ -47,8 +53,8 @@ const Login = () => {
           </button>
 
           <div className="flex mt-4 justify-between items-center gap-1 *:rounded">
-            <button className="w-full bg-blue-300 py-1">Google</button>
-            <button className="w-full bg-blue-300 py-1">Github</button>
+            <button type="button" onClick={signInWithGoogle} className="w-full bg-blue-300 py-1">Google</button>
+            <button type="button" className="w-full bg-blue-300 py-1">Github</button>
           </div>
         </div>
       </form>

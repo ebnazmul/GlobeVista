@@ -8,7 +8,8 @@ import { Tooltip } from "react-tooltip";
 
 const Navbar = () => {
   const { user, setUser, signUserOut } = useContext(AuthContexts);
-  console.log(user);
+
+  // console.log(user);
 
   const handleSignOut = () =>{
     signUserOut()
@@ -31,8 +32,8 @@ const Navbar = () => {
               <li>Home</li>
             </Link>
             <li>All Tourists Spot</li>
-            {/* <li>Countries</li>
-                <li>Tours</li> */}
+            {user && <li>Add Tourists Spot</li>}
+            {user && <li>My List</li>}
           </ul>
         </div>
 
