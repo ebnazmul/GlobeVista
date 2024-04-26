@@ -7,18 +7,21 @@ import { IoLogOutSharp } from "react-icons/io5";
 import { Tooltip } from "react-tooltip";
 
 const Navbar = () => {
-  const { user, setUser, signUserOut } = useContext(AuthContexts);
+  const { user, setUser, signUserOut, loading } = useContext(AuthContexts);
 
-  // console.log(user);
+  console.log(user?.photoURL);
 
-  const handleSignOut = () =>{
-    signUserOut()
-    .then(()=>{
+  const profilePhoto = user?.photoURL || "https://cdn-icons-png.flaticon.com/128/2202/2202112.png";
+
+  const handleSignOut = () => {
+    signUserOut().then(() => {
       setUser(null);
-    })
-  }
+    });
+  };
 
   const [isSignInDropDown, setIsSignDropDown] = useState(false);
+
+  
 
   return (
     <div className="bg-stone-500">
@@ -32,7 +35,11 @@ const Navbar = () => {
               <li>Home</li>
             </Link>
             <li>All Tourists Spot</li>
-            {user && <li>Add Tourists Spot</li>}
+            {user && (
+              <Link to="/addtouristspot">
+                <li>Add Tourists Spot</li>
+              </Link>
+            )}
             {user && <li>My List</li>}
           </ul>
         </div>
@@ -44,11 +51,12 @@ const Navbar = () => {
               data-tooltip-content={user?.displayName || "No Name"}
               data-tooltip-place="top"
               className="h-14 rounded-full"
-              src={user.metadata.photoURL || "https://cdn-icons-png.flaticon.com/128/2202/2202112.png"}
+              src={profilePhoto}
               alt=""
             />
 
-            <button onClick={handleSignOut}
+            <button
+              onClick={handleSignOut}
               data-tooltip-id="tooltip"
               data-tooltip-content="Logout"
               data-tooltip-place="top"

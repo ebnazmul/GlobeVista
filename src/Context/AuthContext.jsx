@@ -40,6 +40,7 @@ const AuthContext = ({ children }) => {
     signInWithPopup(auth, googleProvaider)
     .then(() => {
         toast.success("Successfully Logged!")
+        setUserInstantUpdate(!userInstantUpdate)
     })
     .catch(err => console.log(err))
   }
