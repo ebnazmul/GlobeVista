@@ -9,9 +9,12 @@ import "swiper/css/navigation";
 import Card from "../../Componant/Card/Card";
 import { Link } from "react-router-dom";
 import { Typewriter } from "react-simple-typewriter";
+import Card3 from "../../Componant/Card3/Card3";
 
 const Home = () => {
   const [posts, setPosts] = useState([]);
+  const [countries, setCountries] = useState([])
+
   useEffect(() => {
     axios
       .get("http://localhost:5000/allposts")
@@ -21,6 +24,12 @@ const Home = () => {
       })
       .catch(() => toast.error("Something went wrong"));
   }, []);
+
+  useEffect(()=>{
+    axios.get("http://localhost:5000/countries").then((data)=> setCountries(data.data))
+  },[])
+
+  
 
 //   console.log(posts);
 
@@ -74,6 +83,14 @@ const Home = () => {
         <div className="max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-3 gap-8">
             {
                 posts.map((post)=> <Link to={`/details/${post._id}`} key={post._id}><Card key={post._id} post={post}></Card></Link>)
+            }
+        </div>
+      </div>
+      <div className="max-w-7xl mx-auto my-10">
+        <h2 className="text-3xl text-center">Countries</h2>
+        <div className="grid grid-cols-3 gap-4">
+            {
+                countries.map((data)=> <Card3 data={data} key={data._id}></Card3>)
             }
         </div>
       </div>
