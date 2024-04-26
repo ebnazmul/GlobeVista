@@ -7,9 +7,8 @@ import { IoLogOutSharp } from "react-icons/io5";
 import { Tooltip } from "react-tooltip";
 
 const Navbar = () => {
-  const { user, setUser, signUserOut, loading } = useContext(AuthContexts);
+  const { user, setUser, signUserOut } = useContext(AuthContexts);
 
-  console.log(user?.photoURL);
 
   const profilePhoto = user?.photoURL || "https://cdn-icons-png.flaticon.com/128/2202/2202112.png";
 
