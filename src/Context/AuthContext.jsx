@@ -38,8 +38,11 @@ const AuthContext = ({ children }) => {
       if (user) {
         setUser(user);
         setLoading(false);
+      }else{
+        setLoading(false);
       }
     });
+
   }, [userInstantUpdate]);
 
   const signUpWithEmail = (email, password) => {
@@ -49,13 +52,14 @@ const AuthContext = ({ children }) => {
   const signInWithEmail = (email, password) => {
     return signInWithEmailAndPassword(auth, email, password);
   };
+
   const signInWithGoogle = () => {
     signInWithPopup(auth, googleProvaider)
     .then(() => {
         toast.success("Successfully Logged!")
         setUserInstantUpdate(!userInstantUpdate)
     })
-    .catch(err => console.log(err))
+    .catch(() => toast.error("Something went wrong"))
   }
 
   const updateUserProfile = (fullName, photoURL) => {
@@ -66,7 +70,12 @@ const AuthContext = ({ children }) => {
   };
 
   const signUserOut = () => {
-    return signOut(auth);
+    signOut(auth)
+    .then(()=>{
+      toast.success("Sign Out Successfully")
+      setUser(null)
+    })
+    .catch(()=>toast.error("Something went wrong"))
   };
 
   const value = {

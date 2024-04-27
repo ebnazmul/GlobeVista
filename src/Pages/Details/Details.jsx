@@ -5,7 +5,7 @@ import { useParams } from "react-router-dom";
 const Details = () => {
   const { id } = useParams();
 
-  const [data, setData] = useState([]);
+  const [data, setData] = useState({});
 
   useEffect(() => {
     axios.get(`http://localhost:5000/post/${id}`).then((res) => setData(res.data));

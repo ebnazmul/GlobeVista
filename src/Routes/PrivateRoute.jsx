@@ -1,25 +1,23 @@
 import { useContext } from "react";
 import { AuthContexts } from "../Context/AuthContext";
+import { Navigate } from "react-router-dom";
 
+const PrivateRoute = ({ children }) => {
+  const { user, loading } = useContext(AuthContexts);
 
-// eslint-disable-next-line react/prop-types
-const PrivateRoute = ({children}) => {
-const {user, loading} = useContext(AuthContexts);
-
-
-    if(loading){
-        return <div>Loading...</div>
-    }
-
-    if(!user){
-        return <div></div>
-    }
-
+  if (loading) {
     return (
-        <div>
-            {children}
-        </div>
+      <div className="flex h-screen justify-center items-center">
+        <span className="loading loading-dots loading-lg" />
+      </div>
     );
+  }
+
+  if (!user) {
+    return <Navigate to="/login" />;
+  }
+
+  return <div>{children}</div>;
 };
 
 export default PrivateRoute;

@@ -7,7 +7,7 @@ import { IoLogOutSharp } from "react-icons/io5";
 import { Tooltip } from "react-tooltip";
 
 const Navbar = () => {
-  const { user, setUser, signUserOut } = useContext(AuthContexts);
+  const { user, signUserOut } = useContext(AuthContexts);
   const [isSignInDropDown, setIsSignDropDown] = useState(false);
   const [theme, setTheme] = useState(true)
 
@@ -15,11 +15,8 @@ const Navbar = () => {
   const profilePhoto = user?.photoURL || "https://cdn-icons-png.flaticon.com/128/2202/2202112.png";
 
   const handleSignOut = () => {
-    signUserOut().then(() => {
-      setUser(null);
-    });
+    signUserOut()
   };
-
 
   const handleTheme = () => {
     setTheme(!theme)

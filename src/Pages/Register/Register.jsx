@@ -1,10 +1,12 @@
 import { useContext } from "react";
 import { useForm } from "react-hook-form";
 import { AuthContexts } from "../../Context/AuthContext";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 const Register = () => {
   const { signUpWithEmail, updateUserProfile } = useContext(AuthContexts);
+  const navigate = useNavigate()
+
 
   const {
     register,
@@ -20,6 +22,7 @@ const Register = () => {
       updateUserProfile(fullName, photoURL)
     })
     .catch(err => console.log(err))
+    navigate("/")
   };
 
   return (

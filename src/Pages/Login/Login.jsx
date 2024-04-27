@@ -1,12 +1,12 @@
 import { useContext } from "react";
 import { useForm } from "react-hook-form";
 import { AuthContexts } from "../../Context/AuthContext";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import toast from "react-hot-toast";
 
 const Login = () => {
   const { signInWithEmail, userInstantUpdate, setUserInstantUpdate, signInWithGoogle } = useContext(AuthContexts);
-
+  const navigate = useNavigate()
   const {
     register,
     handleSubmit,
@@ -19,11 +19,13 @@ const Login = () => {
     .then(() => {
         toast.success("Login success")
         setUserInstantUpdate(!userInstantUpdate)
-
+        navigate("/")
     })
     .catch(err => console.log(err))
 
   };
+
+  
   
 
   return (
