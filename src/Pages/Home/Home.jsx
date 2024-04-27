@@ -65,7 +65,7 @@ const Home = () => {
             />{" "}
             tour with us today!
           </h2>
-          <button className="bg-gray-600 px-4 py-2 rounded text-xl mt-4">
+          <button className="bg-gray-600 hover:bg-gray-600/60 px-4 py-2 rounded text-xl mt-4">
             Contact Us
           </button>
         </div>

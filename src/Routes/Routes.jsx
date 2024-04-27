@@ -51,7 +51,7 @@ const router = createBrowserRouter([
       },
       {
         path: "mylists/update/:id",
-        element: <Update/>
+        element: <PrivateRoute><Update/></PrivateRoute>
       }
     ],
   },
