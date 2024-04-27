@@ -9,6 +9,7 @@ import Error from "../Pages/Error/Error";
 import Details from "../Pages/Details/Details";
 import MyList from "../Pages/MyList/MyList";
 import AllTouristSpots from "../Pages/AllTouristSpots/AllTouristSpots";
+import Update from "../Pages/Update/Update";
 
 const router = createBrowserRouter([
   {
@@ -47,6 +48,10 @@ const router = createBrowserRouter([
       {
         path: "alltouristspot",
         element: <AllTouristSpots/>
+      },
+      {
+        path: "mylists/update/:id",
+        element: <Update/>
       }
     ],
   },

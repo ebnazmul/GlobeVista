@@ -2,6 +2,7 @@ import axios from "axios";
 import { useContext } from "react";
 import { AuthContexts } from "../../Context/AuthContext";
 import toast from "react-hot-toast";
+import { Link } from "react-router-dom";
 
 const Card2 = ({post}) => {
 
@@ -18,7 +19,6 @@ const Card2 = ({post}) => {
         });
     }
 
-    console.log(post);
     return (
         <div className="border p-4 my-2 flex justify-between">
             <div className="flex gap-2">
@@ -31,7 +31,7 @@ const Card2 = ({post}) => {
             </div>
         </div>
         <div className="*:py-1 *:px-2 *:bg-blue-400 text-gray-100 *:rounded">
-            <button className="mr-2">Update</button>
+            <button className="mr-2"><Link to={`/mylists/update/${post._id}`}>Update</Link></button>
             <button onClick={handleDelete}>Delete</button>
         </div>
         </div>

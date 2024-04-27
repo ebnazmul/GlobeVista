@@ -4,8 +4,6 @@ import { FaLocationArrow } from "react-icons/fa";
 import Logo from "../Extra/Logo/Logo";
 
 
-
-
 const Footer = () => {
     return (
         <div className="bg-gray-300 text-gray-900">
@@ -27,7 +25,6 @@ const Footer = () => {
                         <li>Twitter</li>
                     </ul>
                 </div>
-
             </div>
             <div className="text-center py-2 border-t">
                 <p>All rights reserved &copy; GlobeVista.com 2024</p>
