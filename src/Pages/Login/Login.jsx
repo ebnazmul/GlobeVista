@@ -30,7 +30,7 @@ const Login = () => {
     <div>
       <form onSubmit={handleSubmit(onSubmit)}>
         <h2 className="text-2xl text-center my-4">Login</h2>
-        <div className="w-[320px] mx-auto border p-5">
+        <div className="w-[320px] mx-auto border p-5 mb-40">
           <p className="mb-2">Email</p>
           <input
             className="border outline-none py-1 px-2 w-full"
@@ -48,11 +48,11 @@ const Login = () => {
           <p className="mt-4">Dont have an account? <Link to="/register"><span className="text-blue-800">Register</span></Link></p>
           <button
             type="submit"
-            className="w-full bg-gray-300 mt-5 px-1 py-2 rounded">
+            className="w-full bg-gray-300 text-gray-800 mt-5 px-1 py-2 rounded">
             Login
           </button>
 
-          <div className="flex mt-4 justify-between items-center gap-1 *:rounded">
+          <div className="flex mt-4 justify-between items-center gap-1 *:rounded *:text-gray-800">
             <button type="button" onClick={signInWithGoogle} className="w-full bg-blue-300 py-1">Google</button>
             <button type="button" className="w-full bg-blue-300 py-1">Github</button>
           </div>
