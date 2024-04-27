@@ -1,6 +1,5 @@
 import axios from "axios";
-import { useEffect, useState } from "react";
-import toast from "react-hot-toast";
+import { useContext, useEffect, useState } from "react";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Autoplay, Pagination, Navigation } from "swiper/modules";
 import "swiper/css";
@@ -10,29 +9,20 @@ import Card from "../../Componant/Card/Card";
 import { Link } from "react-router-dom";
 import { Typewriter } from "react-simple-typewriter";
 import Card3 from "../../Componant/Card3/Card3";
+import { AuthContexts } from "../../Context/AuthContext";
 
 const Home = () => {
-  const [posts, setPosts] = useState([]);
-  const [countries, setCountries] = useState([])
 
+  const { posts: data } = useContext(AuthContexts);
+  const posts = data.slice(0, 6);
+  const [countries, setCountries] = useState([])
   useEffect(() => {
     axios
-      .get("http://localhost:5000/allposts")
-      .then((res) => {
-        // console.log(res);
-        setPosts(res.data);
-      })
-      .catch(() => toast.error("Something went wrong"));
+      .get("http://localhost:5000/countries")
+      .then((data) => setCountries(data.data));
   }, []);
 
-  useEffect(()=>{
-    axios.get("http://localhost:5000/countries").then((data)=> setCountries(data.data))
-  },[])
-
   
-
-//   console.log(posts);
-
   return (
     <div>
       <div className="mt-10 max-w-6xl mx-auto relative">
@@ -63,15 +53,17 @@ const Home = () => {
         <div className="absolute top-5 z-10 bg-black bg-opacity-40 text-white p-20">
           <h2 className="text-3xl">
             Ready for adventure? <br />
-            Book your next <Typewriter
-            words={['Safe', 'Cheap', 'Best']}
-            loop={5}
-            cursor
-            cursorStyle='_'
-            typeSpeed={70}
-            deleteSpeed={50}
-            delaySpeed={1000}
-          /> tour with us today!
+            Book your next{" "}
+            <Typewriter
+              words={["Safe", "Cheap", "Best"]}
+              loop={5}
+              cursor
+              cursorStyle="_"
+              typeSpeed={70}
+              deleteSpeed={50}
+              delaySpeed={1000}
+            />{" "}
+            tour with us today!
           </h2>
           <button className="bg-gray-600 px-4 py-2 rounded text-xl mt-4">
             Contact Us
@@ -79,19 +71,23 @@ const Home = () => {
         </div>
       </div>
       <div>
-        <h2 className="text-center text-xl lg:text-3xl my-10">Our Popular Destinations</h2>
+        <h2 className="text-center text-xl lg:text-3xl my-10">
+          Our Popular Destinations
+        </h2>
         <div className="max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-3 gap-8">
-            {
-                posts.map((post)=> <Link to={`/details/${post._id}`} key={post._id}><Card key={post._id} post={post}></Card></Link>)
-            }
+          {posts.map((post) => (
+            <Link to={`/details/${post._id}`} key={post._id}>
+              <Card key={post._id} post={post}></Card>
+            </Link>
+          ))}
         </div>
       </div>
       <div className="max-w-7xl mx-auto my-10">
-        <h2 className="text-3xl text-center">Countries</h2>
+        <h2 className="text-3xl text-center my-4">Countries</h2>
         <div className="grid grid-cols-3 gap-4">
-            {
-                countries.map((data)=> <Card3 data={data} key={data._id}></Card3>)
-            }
+          {countries.map((data) => (
+            <Card3 data={data} key={data._id}></Card3>
+          ))}
         </div>
       </div>
     </div>

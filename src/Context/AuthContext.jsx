@@ -10,6 +10,7 @@ import {
 import { createContext, useEffect, useState } from "react";
 import auth from "../firebase/firebase.config";
 import toast from "react-hot-toast";
+import axios from "axios";
 
 export const AuthContexts = createContext(null);
 const googleProvaider = new GoogleAuthProvider()
@@ -19,6 +20,17 @@ const AuthContext = ({ children }) => {
   const [user, setUser] = useState(null);
   const [userInstantUpdate, setUserInstantUpdate] = useState(false);
   const [loading, setLoading] = useState(true);
+  const [posts, setPosts] = useState([]);
+
+  useEffect(() => {
+    axios
+      .get("http://localhost:5000/allposts")
+      .then((res) => {
+        // console.log(res);
+        setPosts(res.data);
+      })
+      .catch(() => toast.error("Something went wrong"));
+  }, []);
 
   useEffect(() => {
     onAuthStateChanged(auth, (user) => {
@@ -57,6 +69,7 @@ const AuthContext = ({ children }) => {
   };
 
   const value = {
+    posts,
     user,
     setUser,
     signUpWithEmail,
