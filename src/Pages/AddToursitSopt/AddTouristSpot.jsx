@@ -23,7 +23,7 @@ const AddTouristSpot = () => {
 
   return (
     <div className="max-w-3xl mx-auto">
-      <div className="mt-5">
+      <div className="my-5">
         <h2 className="text-xl text-center">Add a new tourist place</h2>
         <form onSubmit={handleSubmit(onSubmit)}>
           <div>

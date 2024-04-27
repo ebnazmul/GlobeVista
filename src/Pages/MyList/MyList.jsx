@@ -1,17 +1,21 @@
 import axios from "axios";
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import Card2 from "../../Componant/Card2/Card2";
+import { AuthContexts } from "../../Context/AuthContext";
 
 
 const MyList = () => {
 
+    const {user, postUpdate} = useContext(AuthContexts)
+
     const [data, setData] = useState([])
 
     useEffect(()=>{
-        axios.post('http://localhost:5000/mylists', {email: 'elitebucksco@gmail.com'})
+        axios.post('http://localhost:5000/mylists', {email: `${user.email}`})
         .then(res=>setData(res.data))
         .catch(res=>console.log(res))
-    },[])
+    },[user.email, postUpdate])
+
 
     // console.log(data);
 

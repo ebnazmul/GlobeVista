@@ -38,11 +38,11 @@ const router = createBrowserRouter([
       },
       {
         path: "details/:id",
-        element: <Details/>
+        element: <PrivateRoute><Details/></PrivateRoute>
       },
       {
         path: "mylists",
-        element: <MyList/>
+        element: <PrivateRoute><MyList/></PrivateRoute>
       },
       {
         path: "alltouristspot",

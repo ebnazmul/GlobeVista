@@ -21,6 +21,7 @@ const AuthContext = ({ children }) => {
   const [userInstantUpdate, setUserInstantUpdate] = useState(false);
   const [loading, setLoading] = useState(true);
   const [posts, setPosts] = useState([]);
+  const [postUpdate, setPostUpdate] = useState(true)
 
   useEffect(() => {
     axios
@@ -30,7 +31,7 @@ const AuthContext = ({ children }) => {
         setPosts(res.data);
       })
       .catch(() => toast.error("Something went wrong"));
-  }, []);
+  }, [postUpdate]);
 
   useEffect(() => {
     onAuthStateChanged(auth, (user) => {
@@ -80,7 +81,9 @@ const AuthContext = ({ children }) => {
     setLoading,
     userInstantUpdate,
     setUserInstantUpdate,
-    signInWithGoogle
+    signInWithGoogle,
+    postUpdate,
+    setPostUpdate
   };
 
   return (
