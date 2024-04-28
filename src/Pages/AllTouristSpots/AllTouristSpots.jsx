@@ -1,4 +1,4 @@
-import { useContext } from "react";
+import { useContext, useState } from "react";
 import { AuthContexts } from "../../Context/AuthContext";
 import Card from "../../Componant/Card/Card";
 import { Link } from "react-router-dom";
@@ -7,13 +7,26 @@ import toast from "react-hot-toast";
 
 const AllTouristSpots = () => {
   const { posts, setPosts } = useContext(AuthContexts);
+  const [loading, setLoading] = useState(false);
 
   const handleSort = () => {
+    setLoading(true);
     axios
       .get("https://glovevista-server.vercel.app/allposts/sort")
-      .then((res) => setPosts(res.data))
+      .then((res) => {
+        setPosts(res.data);
+        setLoading(false);
+      })
       .catch(() => toast.error("Something went wrong"));
   };
+
+  if (loading) {
+    return (
+      <div className="flex h-screen justify-center items-center">
+        <span className="loading loading-dots loading-lg" />
+      </div>
+    );
+  }
 
   return (
     <div>

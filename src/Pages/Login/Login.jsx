@@ -10,6 +10,7 @@ const Login = () => {
     userInstantUpdate,
     setUserInstantUpdate,
     signInWithGoogle,
+    signInWithGithub
   } = useContext(AuthContexts);
   const navigate = useNavigate();
   const {
@@ -37,6 +38,19 @@ const Login = () => {
         navigate("/");
       })
       .catch(() => toast.error("Something went wrong"));
+  };
+
+  const handleSignInGithub = () => {
+    signInWithGithub()
+      .then(() => {
+        toast.success("Successfully Logged!");
+        setUserInstantUpdate(!userInstantUpdate);
+        navigate("/");
+      })
+      .catch(() => {
+        toast.error("Something went wrong")
+        // console.log(err);
+      });
   };
 
   return (
@@ -77,7 +91,7 @@ const Login = () => {
               className="w-full bg-blue-300 py-1">
               Google
             </button>
-            <button type="button" className="w-full bg-blue-300 py-1">
+            <button onClick={handleSignInGithub} type="button" className="w-full bg-blue-300 py-1">
               Github
             </button>
           </div>

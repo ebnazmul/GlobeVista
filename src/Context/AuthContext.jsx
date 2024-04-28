@@ -5,7 +5,8 @@ import {
   signInWithPopup,
   signOut,
   updateProfile,
-  GoogleAuthProvider
+  GoogleAuthProvider,
+  GithubAuthProvider
 } from "firebase/auth";
 import { createContext, useEffect, useState } from "react";
 import auth from "../firebase/firebase.config";
@@ -14,6 +15,7 @@ import axios from "axios";
 
 export const AuthContexts = createContext(null);
 const googleProvaider = new GoogleAuthProvider()
+const githubProvaider = new GithubAuthProvider()
 
 // eslint-disable-next-line react/prop-types
 const AuthContext = ({ children }) => {
@@ -56,6 +58,9 @@ const AuthContext = ({ children }) => {
   const signInWithGoogle = () => {
     return signInWithPopup(auth, googleProvaider)
   }
+  const signInWithGithub = () => {
+    return signInWithPopup(auth, githubProvaider)
+  }
 
   const updateUserProfile = (fullName, photoURL) => {
     return updateProfile(auth.currentUser, {
@@ -87,6 +92,7 @@ const AuthContext = ({ children }) => {
     userInstantUpdate,
     setUserInstantUpdate,
     signInWithGoogle,
+    signInWithGithub,
     postUpdate,
     setPostUpdate
   };

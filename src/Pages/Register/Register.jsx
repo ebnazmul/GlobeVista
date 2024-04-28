@@ -7,7 +7,7 @@ import toast from "react-hot-toast";
 const Register = () => {
   const { signUpWithEmail, updateUserProfile } = useContext(AuthContexts);
   const navigate = useNavigate()
-  const {userInstantUpdate, setUserInstantUpdate, signInWithGoogle} = useContext(AuthContexts)
+  const {userInstantUpdate, setUserInstantUpdate, signInWithGoogle, signInWithGithub} = useContext(AuthContexts)
 
 
   const {
@@ -42,6 +42,19 @@ const Register = () => {
       })
       .catch(() => toast.error("Something went wrong"));
   }
+
+  const handleSignInGithub = () => {
+    signInWithGithub()
+      .then(() => {
+        toast.success("Successfully Logged!");
+        setUserInstantUpdate(!userInstantUpdate);
+        navigate("/");
+      })
+      .catch(() => {
+        toast.error("Something went wrong")
+        // console.log(err);
+      });
+  };
 
   return (
     <div>
@@ -91,7 +104,7 @@ const Register = () => {
       <div className="w-[320px] mx-auto mb-4">
       <div className="flex mt-4 justify-between items-center gap-1 *:rounded">
             <button onClick={handleGoogleSignUp} className="w-full bg-blue-300 py-1">Google</button>
-            <button className="w-full bg-blue-300 py-1">Github</button>
+            <button onClick={handleSignInGithub} className="w-full bg-blue-300 py-1">Github</button>
           </div>
       </div>
     </div>
