@@ -25,7 +25,7 @@ const AuthContext = ({ children }) => {
 
   useEffect(() => {
     axios
-      .get("https://assignment10-eta.vercel.app/allposts")
+      .get("https://glovevista-server.vercel.app/allposts")
       .then((res) => {
         // console.log(res);
         setPosts(res.data);

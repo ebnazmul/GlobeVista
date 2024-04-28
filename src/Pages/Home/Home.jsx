@@ -18,7 +18,7 @@ const Home = () => {
   const [countries, setCountries] = useState([])
   useEffect(() => {
     axios
-      .get("https://assignment10-eta.vercel.app/countries")
+      .get("https://glovevista-server.vercel.app/countries")
       .then((data) => setCountries(data.data));
   }, []);
 

@@ -9,7 +9,7 @@ const Details = () => {
 
   useEffect(() => {
     axios
-      .get(`https://assignment10-eta.vercel.app/post/${id}`)
+      .get(`https://glovevista-server.vercel.app/post/${id}`)
       .then((res) => setData(res.data));
   }, [id]);
 

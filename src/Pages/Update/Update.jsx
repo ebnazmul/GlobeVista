@@ -17,7 +17,7 @@ const Update = () => {
 
   useEffect(() => {
     axios
-      .get(`https://assignment10-eta.vercel.app/post/${id}`)
+      .get(`https://glovevista-server.vercel.app/post/${id}`)
       .then((res) => setData(res.data));
   }, [id]);
 
@@ -30,7 +30,7 @@ const Update = () => {
   const onSubmit = (data) => {
     const newData = { ...data, email: user.email };
     console.log(newData);
-    axios.patch(`https://assignment10-eta.vercel.app/mylists/update/${id}`, newData)
+    axios.patch(`https://glovevista-server.vercel.app/mylists/update/${id}`, newData)
       .then((res) => {
         if(res.data.acknowledged){
             toast.success("Successfully updated")

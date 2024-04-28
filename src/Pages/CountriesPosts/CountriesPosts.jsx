@@ -10,7 +10,7 @@ const CountriesPosts = () => {
    const [data, setData] = useState([])
 
    useEffect(()=>{
-    axios.get(`https://assignment10-eta.vercel.app/country/${name}`)
+    axios.get(`https://glovevista-server.vercel.app/country/${name}`)
     .then(res=>setData(res.data))
     .catch(err=> console.log(err))
    },[name])

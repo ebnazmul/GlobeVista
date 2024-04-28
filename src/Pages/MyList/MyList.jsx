@@ -11,7 +11,7 @@ const MyList = () => {
     const [data, setData] = useState([])
 
     useEffect(()=>{
-        axios.post('https://assignment10-eta.vercel.app/mylists', {email: `${user.email}`})
+        axios.post('https://glovevista-server.vercel.app/mylists', {email: `${user.email}`})
         .then(res=>setData(res.data))
         .catch(res=>console.log(res))
     },[user.email, postUpdate])
