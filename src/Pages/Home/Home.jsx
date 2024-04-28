@@ -86,7 +86,7 @@ const Home = () => {
         <h2 className="text-3xl text-center my-4">Countries</h2>
         <div className="grid grid-cols-3 gap-4">
           {countries.map((data) => (
-            <Card3 data={data} key={data._id}></Card3>
+            <Link to={`/country/${data.country}`} key={data._id}><Card3 data={data}></Card3></Link>
           ))}
         </div>
       </div>
