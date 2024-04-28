@@ -17,7 +17,7 @@ const Update = () => {
 
   useEffect(() => {
     axios
-      .get(`http://localhost:5000/post/${id}`)
+      .get(`https://assignment10-eta.vercel.app/post/${id}`)
       .then((res) => setData(res.data));
   }, [id]);
 
@@ -30,7 +30,7 @@ const Update = () => {
   const onSubmit = (data) => {
     const newData = { ...data, email: user.email };
     console.log(newData);
-    axios.patch(`http://localhost:5000/mylists/update/${id}`, newData)
+    axios.patch(`https://assignment10-eta.vercel.app/mylists/update/${id}`, newData)
       .then((res) => {
         if(res.data.acknowledged){
             toast.success("Successfully updated")

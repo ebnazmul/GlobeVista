@@ -13,7 +13,7 @@ const AddTouristSpot = () => {
 
     console.log(newData);
 
-    axios.post("http://localhost:5000/newpost", newData)
+    axios.post("https://assignment10-eta.vercel.app/newpost", newData)
       .then((res) => {
         if (res?.data.insertedId) {
           toast.success("New Post Added");

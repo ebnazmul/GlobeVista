@@ -9,7 +9,7 @@ const Card2 = ({post}) => {
     const {postUpdate, setPostUpdate} = useContext(AuthContexts)
 
     const handleDelete = () => {
-        axios.delete(`http://localhost:5000/mylists/delete/${post._id}`)
+        axios.delete(`https://assignment10-eta.vercel.app/mylists/delete/${post._id}`)
         .then(() => {
             toast.success("Post Deleted Successfully")
             setPostUpdate(!postUpdate)
