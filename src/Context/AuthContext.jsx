@@ -54,12 +54,7 @@ const AuthContext = ({ children }) => {
   };
 
   const signInWithGoogle = () => {
-    signInWithPopup(auth, googleProvaider)
-    .then(() => {
-        toast.success("Successfully Logged!")
-        setUserInstantUpdate(!userInstantUpdate)
-    })
-    .catch(() => toast.error("Something went wrong"))
+    return signInWithPopup(auth, googleProvaider)
   }
 
   const updateUserProfile = (fullName, photoURL) => {
@@ -80,6 +75,7 @@ const AuthContext = ({ children }) => {
 
   const value = {
     posts,
+    setPosts,
     user,
     setUser,
     signUpWithEmail,

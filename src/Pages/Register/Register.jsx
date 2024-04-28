@@ -2,10 +2,12 @@ import { useContext } from "react";
 import { useForm } from "react-hook-form";
 import { AuthContexts } from "../../Context/AuthContext";
 import { Link, useNavigate } from "react-router-dom";
+import toast from "react-hot-toast";
 
 const Register = () => {
   const { signUpWithEmail, updateUserProfile } = useContext(AuthContexts);
   const navigate = useNavigate()
+  const {userInstantUpdate, setUserInstantUpdate, signInWithGoogle} = useContext(AuthContexts)
 
 
   const {
@@ -20,10 +22,26 @@ const Register = () => {
     signUpWithEmail(email, password)
     .then(() => {
       updateUserProfile(fullName, photoURL)
+      .then(()=>{
+        setUserInstantUpdate(!userInstantUpdate)
+        toast.success("Successfully Logged")
+        navigate("/")
+      })
+      .catch(()=> toast.error("Something went wrong"))
+      
     })
-    .catch(err => console.log(err))
-    navigate("/")
+    .catch(() => toast.error("Something went wrong"))
   };
+
+  const handleGoogleSignUp = () =>{
+    signInWithGoogle()
+      .then(() => {
+        toast.success("Successfully Logged!");
+        setUserInstantUpdate(!userInstantUpdate);
+        navigate("/");
+      })
+      .catch(() => toast.error("Something went wrong"));
+  }
 
   return (
     <div>
@@ -57,7 +75,7 @@ const Register = () => {
           <p className="mb-2 mt-4">Photo URL</p>
           <input
             className="border outline-none py-1 px-2 w-full"
-            type="password"
+            type="text"
             placeholder="Enter your Photos URL..."
             {...register("photoURL", {required: true})}
           />
@@ -67,14 +85,15 @@ const Register = () => {
             type="submit"
             className="w-full bg-gray-300 mt-5 px-1 py-2 rounded">
             Register
-          </button>
-
-          <div className="flex mt-4 justify-between items-center gap-1 *:rounded">
-            <button className="w-full bg-blue-300 py-1">Google</button>
-            <button className="w-full bg-blue-300 py-1">Github</button>
-          </div>
+          </button> 
         </div>
       </form>
+      <div className="w-[320px] mx-auto mb-4">
+      <div className="flex mt-4 justify-between items-center gap-1 *:rounded">
+            <button onClick={handleGoogleSignUp} className="w-full bg-blue-300 py-1">Google</button>
+            <button className="w-full bg-blue-300 py-1">Github</button>
+          </div>
+      </div>
     </div>
   );
 };

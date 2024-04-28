@@ -5,8 +5,13 @@ import { Link, useNavigate } from "react-router-dom";
 import toast from "react-hot-toast";
 
 const Login = () => {
-  const { signInWithEmail, userInstantUpdate, setUserInstantUpdate, signInWithGoogle } = useContext(AuthContexts);
-  const navigate = useNavigate()
+  const {
+    signInWithEmail,
+    userInstantUpdate,
+    setUserInstantUpdate,
+    signInWithGoogle,
+  } = useContext(AuthContexts);
+  const navigate = useNavigate();
   const {
     register,
     handleSubmit,
@@ -14,19 +19,25 @@ const Login = () => {
   } = useForm();
 
   const onSubmit = (data) => {
-    const {email, password} = data;
+    const { email, password } = data;
     signInWithEmail(email, password)
-    .then(() => {
-        toast.success("Login success")
-        setUserInstantUpdate(!userInstantUpdate)
-        navigate("/")
-    })
-    .catch(err => console.log(err))
-
+      .then(() => {
+        toast.success("Login success");
+        setUserInstantUpdate(!userInstantUpdate);
+        navigate("/");
+      })
+      .catch((err) => console.log(err));
   };
 
-  
-  
+  const handleSignInGoogle = () => {
+    signInWithGoogle()
+      .then(() => {
+        toast.success("Successfully Logged!");
+        setUserInstantUpdate(!userInstantUpdate);
+        navigate("/");
+      })
+      .catch(() => toast.error("Something went wrong"));
+  };
 
   return (
     <div>
@@ -47,7 +58,12 @@ const Login = () => {
             placeholder="Enter your password..."
             {...register("password")}
           />
-          <p className="mt-4">Dont have an account? <Link to="/register"><span className="text-blue-800">Register</span></Link></p>
+          <p className="mt-4">
+            Dont have an account?{" "}
+            <Link to="/register">
+              <span className="text-blue-800">Register</span>
+            </Link>
+          </p>
           <button
             type="submit"
             className="w-full bg-gray-300 text-gray-800 mt-5 px-1 py-2 rounded">
@@ -55,8 +71,15 @@ const Login = () => {
           </button>
 
           <div className="flex mt-4 justify-between items-center gap-1 *:rounded *:text-gray-800">
-            <button type="button" onClick={signInWithGoogle} className="w-full bg-blue-300 py-1">Google</button>
-            <button type="button" className="w-full bg-blue-300 py-1">Github</button>
+            <button
+              type="button"
+              onClick={handleSignInGoogle}
+              className="w-full bg-blue-300 py-1">
+              Google
+            </button>
+            <button type="button" className="w-full bg-blue-300 py-1">
+              Github
+            </button>
           </div>
         </div>
       </form>
