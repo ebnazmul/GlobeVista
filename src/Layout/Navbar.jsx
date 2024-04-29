@@ -9,13 +9,12 @@ import { MdMenu } from "react-icons/md";
 import { RxCross1 } from "react-icons/rx";
 
 const Navbar = () => {
-  const { user, signUserOut } = useContext(AuthContexts);
+  const { user, signUserOut, loading } = useContext(AuthContexts);
   const [isSignInDropDown, setIsSignDropDown] = useState(false);
   const [theme, setTheme] = useState(true);
   const [dropdownState, setDropdownState] = useState(true);
 
-  const profilePhoto =
-    user?.photoURL || "https://cdn-icons-png.flaticon.com/128/2202/2202112.png";
+ 
 
   const handleSignOut = () => {
     signUserOut();
@@ -33,6 +32,12 @@ const Navbar = () => {
       document.querySelector("html").setAttribute("data-theme", "light");
     }
   }, [theme]);
+
+  // console.log(user?.photoURL);
+
+  if(loading){
+    return <div></div>
+  }
 
   return (
     <div className="bg-stone-500">
@@ -70,6 +75,7 @@ const Navbar = () => {
           </ul>
         </div>
 
+
         {user ? (
           <div className="flex items-center gap-2">
             <input
@@ -79,14 +85,16 @@ const Navbar = () => {
               className="toggle theme-controller bg-amber-300 border-sky-400 [--tglbg:theme(colors.sky.500)] checked:bg-blue-300 checked:border-blue-800 checked:[--tglbg:theme(colors.blue.900)] row-start-1 col-start-1 col-span-2"
             />
 
+            <div
+             data-tooltip-id="tooltip"
+             data-tooltip-content={user?.displayName || "No Name"}
+             data-tooltip-place="top"
+             className="h-14 w-14 rounded-full bg-blue-400">
             <img
-              data-tooltip-id="tooltip"
-              data-tooltip-content={user?.displayName || "No Name"}
-              data-tooltip-place="top"
-              className="h-14 rounded-full"
-              src={profilePhoto}
-              alt=""
+              className="h-14 w-14 rounded-full"
+              src={user.photoURL || "https://cdn-icons-png.flaticon.com/128/2202/2202112.png"}
             />
+            </div>
 
             <button
               onClick={handleSignOut}

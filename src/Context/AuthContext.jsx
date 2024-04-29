@@ -25,17 +25,6 @@ const AuthContext = ({ children }) => {
   const [posts, setPosts] = useState([]);
   const [postUpdate, setPostUpdate] = useState(true)
 
-  useEffect(() => {
-    setLoading(true)
-    axios
-      .get("https://glovevista-server.vercel.app/allposts")
-      .then((res) => {
-        // console.log(res);
-        setPosts(res.data);
-        setLoading(false)
-      })
-      .catch(() => toast.error("Something went wrong"));
-  }, [postUpdate]);
 
   useEffect(() => {
     onAuthStateChanged(auth, (user) => {
@@ -48,6 +37,18 @@ const AuthContext = ({ children }) => {
     });
 
   }, [userInstantUpdate]);
+
+  useEffect(() => {
+    setLoading(true)
+    axios
+      .get("https://glovevista-server.vercel.app/allposts")
+      .then((res) => {
+        setPosts(res.data);
+      })
+      .catch(() => toast.error("Something went wrong"));
+  }, [postUpdate]);
+
+
 
   const signUpWithEmail = (email, password) => {
     return createUserWithEmailAndPassword(auth, email, password);
