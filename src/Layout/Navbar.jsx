@@ -1,4 +1,4 @@
-import { Link } from "react-router-dom";
+import { Link, NavLink } from "react-router-dom";
 import Logo from "../Extra/Logo/Logo";
 import { FaLock } from "react-icons/fa6";
 import { useContext, useEffect, useState } from "react";
@@ -38,18 +38,29 @@ const Navbar = () => {
         <Link to="/">
           <Logo />
         </Link>
-        <div className="flex gap-4">
-          <ul className="flex hover:*:bg-white/10 *:px-3 *:py-4 hover:*:rounded hover:*:border-b text-xl text-white items-center">
-            <Link to="/">
+        <div className="flex gap-4 hidden">
+          <ul className="flex hover:*:bg-white/10 *:px-3 *:py-4 *:rounded hover:*:border-b text-xl text-white items-center">
+            <NavLink
+            className={({ isActive }) =>
+            isActive ? "bg-white/10" : ""
+          }
+             to="/">
               <li>Home</li>
-            </Link>
-            <Link to="/alltouristspot"><li>All Tourists Spot</li></Link>
+            </NavLink>
+
+            <NavLink className={({ isActive }) =>
+            isActive ? "bg-white/10" : ""
+          } to="/alltouristspot"><li>All Tourists Spot</li></NavLink>
             {user && (
-              <Link to="/addtouristspot">
+              <NavLink className={({ isActive }) =>
+              isActive ? "bg-white/10" : ""
+            } to="/addtouristspot">
                 <li>Add Tourists Spot</li>
-              </Link>
+              </NavLink>
             )}
-            {user && <Link to="/mylists"><li>My List</li></Link>}
+            {user && <NavLink className={({ isActive }) =>
+            isActive ? "bg-white/10" : ""
+          } to="/mylists"><li>My List</li></NavLink>}
           </ul>
         </div>
 

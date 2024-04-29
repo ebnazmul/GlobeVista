@@ -26,11 +26,13 @@ const AuthContext = ({ children }) => {
   const [postUpdate, setPostUpdate] = useState(true)
 
   useEffect(() => {
+    setLoading(true)
     axios
       .get("https://glovevista-server.vercel.app/allposts")
       .then((res) => {
         // console.log(res);
         setPosts(res.data);
+        setLoading(false)
       })
       .catch(() => toast.error("Something went wrong"));
   }, [postUpdate]);

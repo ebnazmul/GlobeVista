@@ -8,7 +8,7 @@ const Card = ({ post }) => {
   } = post;
 
   return (
-    <div className="h-80 w-96 bg-gray-600 text-white rounded">
+    <div className="h-80 w-full md:w-96 bg-gray-600 text-white rounded">
       <div
         className="h-44 w-full bg-cover"
         style={{ backgroundImage: `url(${image})` }}

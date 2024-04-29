@@ -12,7 +12,7 @@ import Card3 from "../../Componant/Card3/Card3";
 import { AuthContexts } from "../../Context/AuthContext";
 
 const Home = () => {
-  const { posts: data } = useContext(AuthContexts);
+  const { posts: data, loading } = useContext(AuthContexts);
   const posts = data.slice(0, 6);
   const [countries, setCountries] = useState([]);
   useEffect(() => {
@@ -20,6 +20,12 @@ const Home = () => {
       .get("https://glovevista-server.vercel.app/countries")
       .then((data) => setCountries(data.data));
   }, []);
+
+  if (loading) {
+    return <div className="flex h-screen justify-center items-center">
+      <span className="loading loading-dots loading-lg" />
+    </div>;
+  }
 
   return (
     <div>
@@ -48,7 +54,7 @@ const Home = () => {
             </SwiperSlide>
           ))}
         </Swiper>
-        <div className="absolute top-5 z-10 bg-black bg-opacity-40 text-white p-20">
+        <div className="absolute top-2 lg:top-5 z-10 bg-black bg-opacity-40 text-white p-10 lg:p-20">
           <h2 className="text-3xl">
             Ready for adventure? <br />
             Book your next{" "}
@@ -72,7 +78,7 @@ const Home = () => {
         <h2 className="text-center text-xl lg:text-3xl my-10">
           Our Popular Destinations
         </h2>
-        <div className="max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-3 gap-8">
+        <div className="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
           {posts.map((post) => (
             <Link to={`/details/${post._id}`} key={post._id}>
               <Card key={post._id} post={post}></Card>
@@ -80,44 +86,48 @@ const Home = () => {
           ))}
         </div>
       </div>
-      <div className="my-10 h-80 max-w-7xl mx-auto">
+      <div className="my-10 max-w-7xl mx-auto">
         <h1 className="text-4xl text-center">What people say..</h1>
-        <div className="grid grid-cols-3 mt-4 w-full place-items-center">
-        <div className="grid place-items-center text-center border max-w-80 py-2">
-          <img
-            src="https://ld-wt73.template-help.com/wt_prod-20476/images/user-5-87x87.jpg"
-            className="w-20"
-          />
-          <h4 className="text-xl">William Jhon</h4>
-          <p>
-            Just wanted to say many, many thanks for helping me set up an
-            amazing Costa Rican adventure! My nephew and I had a great time! All
-            of the accommodations were perfect, thank you!
-          </p>
-        </div>
-        <div className="grid place-items-center text-center border max-w-80 py-2">
-          <img
-            src="https://ld-wt73.template-help.com/wt_prod-20476/images/user-6-87x87.jpg"
-            className="w-20"
-          />
-          <h4 className="text-xl">Catherine Williams</h4>
-          <p>
-          I wanted to thank you very much for planning the trip to France for my sister and me. It was amazing and exceeded my expectations! We had a wonderful time and were very pleased.
-          </p>
-        </div>
-        <div className="grid place-items-center text-center border max-w-80 py-2">
-          <img
-            src="https://ld-wt73.template-help.com/wt_prod-20476/images/user-7-87x87.jpg"
-            className="w-20"
-          />
-          <h4 className="text-xl">Sam Peterson</h4>
-          <p>
-          We had a marvelous time in our travels to Madagascar, Zimbabwe, and Botswana, we had just wonderful experiences. Your service was amazing and everyone was very attentive!
-          </p>
-        </div>
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 mt-4 w-full place-items-center gap-2">
+          <div className="grid place-items-center text-center border max-w-80 py-2">
+            <img
+              src="https://ld-wt73.template-help.com/wt_prod-20476/images/user-5-87x87.jpg"
+              className="w-20"
+            />
+            <h4 className="text-xl">William Jhon</h4>
+            <p>
+              Just wanted to say many, many thanks for helping me set up an
+              amazing Costa Rican adventure! My nephew and I had a great time!
+              All of the accommodations were perfect, thank you!
+            </p>
+          </div>
+          <div className="grid place-items-center text-center border max-w-80 py-2">
+            <img
+              src="https://ld-wt73.template-help.com/wt_prod-20476/images/user-6-87x87.jpg"
+              className="w-20"
+            />
+            <h4 className="text-xl">Catherine Williams</h4>
+            <p>
+              I wanted to thank you very much for planning the trip to France
+              for my sister and me. It was amazing and exceeded my expectations!
+              We had a wonderful time and were very pleased.
+            </p>
+          </div>
+          <div className="grid place-items-center text-center border max-w-80 py-2">
+            <img
+              src="https://ld-wt73.template-help.com/wt_prod-20476/images/user-7-87x87.jpg"
+              className="w-20"
+            />
+            <h4 className="text-xl">Sam Peterson</h4>
+            <p>
+              We had a marvelous time in our travels to Madagascar, Zimbabwe,
+              and Botswana, we had just wonderful experiences. Your service was
+              amazing and everyone was very attentive!
+            </p>
+          </div>
         </div>
       </div>
-      <div className="max-w-7xl mx-auto h-40 bg-gray-300/60 my-10 py-5">
+      <div className="max-w-7xl mx-auto bg-gray-300/60 my-10 py-5">
         <h2 className="text-center text-xl font-bold">
           Sign Up for 25% Discount
         </h2>
@@ -138,7 +148,7 @@ const Home = () => {
       </div>
       <div className="max-w-7xl mx-auto my-10">
         <h2 className="text-3xl text-center my-4">Countries</h2>
-        <div className="grid grid-cols-3 gap-4">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
           {countries.map((data) => (
             <Link to={`/country/${data.country}`} key={data._id}>
               <Card3 data={data}></Card3>
