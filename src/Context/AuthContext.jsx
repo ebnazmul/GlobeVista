@@ -39,7 +39,6 @@ const AuthContext = ({ children }) => {
   }, [userInstantUpdate]);
 
   useEffect(() => {
-    setLoading(true)
     axios
       .get("https://glovevista-server.vercel.app/allposts")
       .then((res) => {
@@ -47,7 +46,6 @@ const AuthContext = ({ children }) => {
       })
       .catch(() => toast.error("Something went wrong"));
   }, [postUpdate]);
-
 
 
   const signUpWithEmail = (email, password) => {
