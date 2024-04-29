@@ -27,7 +27,13 @@ const Login = () => {
         setUserInstantUpdate(!userInstantUpdate);
         navigate("/");
       })
-      .catch((err) => console.log(err));
+      .catch((err) => {
+        if (err.code == "auth/invalid-credential") {
+          toast.error("Invalid Credential")
+      } else {
+          toast.error("Something went wrong")
+      }
+      });
   };
 
   const handleSignInGoogle = () => {

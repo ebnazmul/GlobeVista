@@ -5,7 +5,7 @@ import toast from "react-hot-toast";
 import { AuthContexts } from "../../Context/AuthContext";
 
 const AddTouristSpot = () => {
-  const { user } = useContext(AuthContexts);
+  const { user, postUpdate, setPostUpdate } = useContext(AuthContexts);
   const { register, handleSubmit } = useForm();
 
   const onSubmit = (data) => {
@@ -17,6 +17,7 @@ const AddTouristSpot = () => {
       .then((res) => {
         if (res?.data.insertedId) {
           toast.success("New Post Added");
+          setPostUpdate(!postUpdate)
         }
       })
       .catch((err) => console.log(err));
