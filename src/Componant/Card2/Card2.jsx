@@ -22,16 +22,18 @@ const Card2 = ({ post }) => {
   };
 
   return (
-    <div className="border p-4 my-2 flex justify-between">
+    <div className="border p-4 my-2 md:flex justify-between">
       <div className="flex gap-2">
         <div>
-          <img src={post.image} className="w-14 h-14" alt="" />
+          <img src={post.image} className="w-14 h-14" />
         </div>
         <div>
           <h2>{post.tourists_spot_name}</h2>
           <div className="flex items-center gap-2 mt-1">
             <h3 className="border px-2 py-1 rounded">{post.country_name}</h3>
-            <h3 className="border px-2 py-1 rounded">{post.average_cost}</h3>
+            <h3 className="border px-2 py-1 rounded text-xs md:text-base">
+              {post.average_cost}
+            </h3>
           </div>
         </div>
       </div>
